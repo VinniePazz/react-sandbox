@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fake, increment, decrement } from './actions/counter';
 import ChildCounter from './ChildCounter';
@@ -12,7 +12,13 @@ const Counter = ({ counter, fake, increment, decrement }) => {
       <button onClick={decrement}>DEC</button>
       <button onClick={increment}>INC</button>
       <button onClick={fake}>FAKE</button>
-      <button onClick={() => {setShow(!show)}}>SHOW CHILD</button>
+      <button
+        onClick={() => {
+          setShow(!show);
+        }}
+      >
+        SHOW CHILD
+      </button>
       {show && <ChildCounter />}
     </div>
   );

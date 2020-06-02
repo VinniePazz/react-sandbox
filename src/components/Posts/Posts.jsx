@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { setPostsFilter } from '../../actions/posts';
+import { setPostsFilter } from '../../ducks/posts/posts';
+import css from './posts.module.css';
 
 const getPostsFilter = (state) => state.posts.filter;
 const getPosts = (state) => state.posts.posts;
@@ -31,7 +32,9 @@ const Posts = ({ posts, setPostsFilter }) => {
       <button onClick={() => setPostsFilter('book')}>BOOK</button>
       <ul>
         {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
+          <li key={post.id} className={css.post}>
+            {post.title}
+          </li>
         ))}
       </ul>
     </div>

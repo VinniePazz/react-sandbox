@@ -1,7 +1,7 @@
-export const increment = () => {
-  return {
+export const increment = () => (dispatch) => {
+  dispatch({
     type: 'INCREMENT',
-  };
+  });
 };
 
 export const decrement = () => {
