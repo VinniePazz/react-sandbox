@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { setPostsFilter } from '../../ducks/posts/posts';
+import {
+  fetchAllPosts,
+  setPostsFilter,
+  createPostAsync,
+} from '../../ducks/posts/posts';
 import css from './posts.module.css';
 
 const getPostsFilter = (state) => state.posts.filter;
@@ -23,13 +27,19 @@ const getPostsByFilter = createSelector(
   }
 );
 
-const Posts = ({ posts, setPostsFilter }) => {
+const Posts = ({ posts, fetchAllPosts, createPostAsync, setPostsFilter }) => {
   console.log('POSTS');
+  useEffect(() => {
+    fetchAllPosts();
+  }, []);
   return (
     <div>
       <button onClick={() => setPostsFilter('all')}>ALL</button>
       <button onClick={() => setPostsFilter('cook')}>COOK</button>
       <button onClick={() => setPostsFilter('book')}>BOOK</button>
+      <button onClick={() => createPostAsync({ title: 'hello' })}>
+        Create post
+      </button>
       <ul>
         {posts.map((post) => (
           <li key={post.id} className={css.post}>
@@ -49,4 +59,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { setPostsFilter })(Posts);
+export default connect(mapStateToProps, {
+  fetchAllPosts,
+  setPostsFilter,
+  createPostAsync,
+})(Posts);

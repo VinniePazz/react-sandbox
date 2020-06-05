@@ -7,7 +7,8 @@ describe('App', () => {
     document.body.innerHTML = '';
   });
   it('renders successfully', () => {
-    const { getByText } = render(<App />);
+    const { getByText, debug } = render(<App />);
+    // debug();
     const incButton = getByText('Increment');
     expect(incButton.textContent).toMatch('Increment');
   });

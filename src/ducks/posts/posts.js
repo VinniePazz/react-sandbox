@@ -3,11 +3,13 @@ import { takeEvery, call, all, put, apply } from 'redux-saga/effects';
 import { produce } from 'immer';
 
 // Actions
-const SET_POSTS_FILTER = 'react-sandbox/posts/SET_POSTS_FILTER';
-const CREATE_POST = 'react-sandbox/posts/CREATE_POST';
-const CREATE_POST_ASYNC = 'react-sandbox/posts/CREATE_POST_ASYNC';
-const START_CREATING_POST = 'react-sandbox/posts/START_CREATING_POST';
-const FINISH_CREATING_POST = 'react-sandbox/posts/FINISH_CREATING_POST';
+const SET_POSTS_FILTER = 'SET_POSTS_FILTER';
+const FETCH_ALL_POSTS = 'FETCH_ALL_POSTS';
+const LOAD_POSTS = 'LOAD_POSTS';
+const CREATE_POST = 'CREATE_POST';
+const CREATE_POST_ASYNC = 'CREATE_POST_ASYNC';
+const START_CREATING_POST = 'START_CREATING_POST';
+const FINISH_CREATING_POST = 'FINISH_CREATING_POST';
 
 // Reducer
 const initialState = {
@@ -18,6 +20,9 @@ const initialState = {
 
 export default produce((draft, action) => {
   switch (action.type) {
+    case LOAD_POSTS:
+      draft.posts = action.payload.posts;
+      return;
     case CREATE_POST:
       draft.posts.push(action.payload.post);
       return;
@@ -34,6 +39,20 @@ export default produce((draft, action) => {
 }, initialState);
 
 // Action Creators
+export const fetchAllPosts = () => {
+  return {
+    type: FETCH_ALL_POSTS,
+  };
+};
+
+export const loadPosts = (posts) => {
+  return {
+    type: LOAD_POSTS,
+    payload: {
+      posts,
+    },
+  };
+};
 
 export const setPostsFilter = (filter) => {
   return {
@@ -93,7 +112,6 @@ function* createPostWorker({ payload }) {
     );
     const result = yield apply(response, response.json);
     yield put(createPost(result));
-    yield put(finishCreatingPost());
   } catch (e) {
     console.log(e instanceof TypeError);
     console.log(e.message);
@@ -102,12 +120,28 @@ function* createPostWorker({ payload }) {
   }
 }
 
+function* fetchAllPostsWorker() {
+  try {
+    const response = yield call(
+      fetch,
+      'https://jsonplaceholder.typicode.com/posts'
+    );
+    const posts = yield apply(response, response.json);
+    yield put(loadPosts(posts));
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
 // Watchers
+function* watchFetchAllPosts() {
+  yield takeEvery(FETCH_ALL_POSTS, fetchAllPostsWorker);
+}
 
 function* watchCreatePost() {
   yield takeEvery(CREATE_POST_ASYNC, createPostWorker);
 }
 
 export function* watchPosts() {
-  yield all([call(watchCreatePost)]);
+  yield all([call(watchCreatePost), call(watchFetchAllPosts)]);
 }
