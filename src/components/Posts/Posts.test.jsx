@@ -1,15 +1,26 @@
 import React from 'react';
-import Posts from './Posts';
-import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import store from '../../init/store';
-import { fetchAllPosts } from '../../ducks/posts/posts';
+import Posts from './Posts';
+import { render, act } from '@testing-library/react';
+import configureStore from 'redux-mock-store';
+// import { act } from 'react-dom/test-utils'; another way of using oroginal "act"
 
-jest.mock('../../ducks/posts/posts', () => ({
-  fetchAllPosts: jest.fn(),
-}));
+const mockStore = configureStore([]);
 
 describe('POSTS', () => {
+  let store;
+
+  beforeEach(() => {
+    store = mockStore({
+      posts: {
+        filter: 'all',
+        posts: [],
+        loading: false,
+      },
+    });
+    store.dispatch = jest.fn();
+  });
+
   it('renders properly', () => {
     const { getByText, debug } = render(
       <Provider store={store}>
@@ -21,13 +32,14 @@ describe('POSTS', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('loads all posts after initial mount', () => {
-    render(
-      <Provider store={store}>
-        <Posts />
-      </Provider>
-    );
-    console.log('asd', fetchAllPosts);
-    expect(fetchAllPosts).toHaveBeenCalledTimes(1);
+  it('fetch posts after first mount', async () => {
+    await act(async () => {
+      render(
+        <Provider store={store}>
+          <Posts />
+        </Provider>
+      );
+    });
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
   });
 });

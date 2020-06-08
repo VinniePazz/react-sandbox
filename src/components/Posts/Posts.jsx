@@ -11,7 +11,7 @@ import css from './posts.module.css';
 const getPostsFilter = (state) => state.posts.filter;
 const getPosts = (state) => state.posts.posts;
 
-const getPostsByFilter = createSelector(
+export const getPostsByFilter = createSelector(
   [getPostsFilter, getPosts],
   (filter, posts) => {
     switch (filter) {
@@ -27,11 +27,12 @@ const getPostsByFilter = createSelector(
   }
 );
 
-const Posts = ({ posts, fetchAllPosts, createPostAsync, setPostsFilter }) => {
-  console.log('POSTS');
+// for visual studio code reference
+let Posts = ({ posts, fetchAllPosts, createPostAsync, setPostsFilter }) => {
+  console.log('POSTS', posts);
   useEffect(() => {
     fetchAllPosts();
-  }, []);
+  }, [fetchAllPosts]);
   return (
     <div>
       <button onClick={() => setPostsFilter('all')}>ALL</button>
@@ -52,15 +53,17 @@ const Posts = ({ posts, fetchAllPosts, createPostAsync, setPostsFilter }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log('MSTP POSTS');
+  console.log('MSTP POSTS', state);
   const posts = getPostsByFilter(state);
   return {
     posts: posts,
   };
 };
 
-export default connect(mapStateToProps, {
+Posts = connect(mapStateToProps, {
   fetchAllPosts,
   setPostsFilter,
   createPostAsync,
 })(Posts);
+
+export default Posts;
