@@ -17,8 +17,7 @@ const Memo = () => {
   const [state, setState] = useState({ text: "hey" })
   console.log("render")
 
-  useEffect(() => {
-    console.log("useEffect")
+  useEffect(() => {console.log("useEffect")
     return () => {
       console.log("cleanup")
     }
