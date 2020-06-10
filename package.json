@@ -47,12 +47,23 @@
   "devDependencies": {
     "eslint": "^7.2.0",
     "eslint-plugin-react": "^7.20.0",
-    "husky": "^4.2.5"
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.9"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier",
-      "pre-push": "npm run test:all"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "linters": {
+      "*.{js,jsx}": [
+        "prettier --write",
+        "git add"
+      ]
+    },
+    "ignore": [
+      "**/api/*.api.ts"
+    ]
   }
 }

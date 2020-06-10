@@ -1,7 +1,9 @@
 import React, { useState, useEffect, memo } from "react"
 
 const Parent = memo((props) => {
-  const [state, setState] = useState({ text: "num: " });console.log("Parent");console.log(props.children)
+  const [state, setState] = useState({ text: "num: " })
+  console.log("Parent")
+  console.log(props.children)
   useEffect(() => {
     console.log("Parent useEffect")
   })
