@@ -15,7 +15,7 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/prop-types': 'off',
-    'no-unused-vars': 2,
+    'no-unused-vars': 1,
     'react/display-name': 1,
   },
 };

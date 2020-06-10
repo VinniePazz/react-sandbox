@@ -57,7 +57,6 @@
   },
   "lint-staged": {
     "*.jsx": [
-      "nmp run lint",
       "npm run prettier"
     ]
   }
