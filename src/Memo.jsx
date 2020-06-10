@@ -1,29 +1,28 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo } from "react"
 
 const CustomDiv = memo(
   (props) => {
-    console.log('CustomDiv');
+    console.log("CustomDiv")
     useEffect(() => {
-      console.log('CustomDiv useEffect');
-    });
-    return <div>{props.text}</div>;
+      console.log("CustomDiv useEffect")
+    })
+    return <div>{props.text}</div>
   },
   function equal(prev, next) {
-    return prev.object.text === next.object.text && prev.text === next.text;
+    return prev.object.text === next.object.text && prev.text === next.text
   }
-);
+)
 
 const Memo = () => {
-  const [state, setState] = useState({ text: 'hey' });
-
-  console.log('render');
+  const [state, setState] = useState({ text: "hey" })
+  console.log("render")
 
   useEffect(() => {
-    console.log('useEffect');
+    console.log("useEffect")
     return () => {
-      console.log('cleanup');
-    };
-  });
+      console.log("cleanup")
+    }
+  })
 
   return (
     <>
@@ -32,13 +31,13 @@ const Memo = () => {
       <div>{state.text}</div>
       <button
         onClick={() => {
-          setState({ text: 'bitch' });
+          setState({ text: "bitch" })
         }}
       >
         Change text
       </button>
     </>
-  );
-};
+  )
+}
 
-export default Memo;
+export default Memo

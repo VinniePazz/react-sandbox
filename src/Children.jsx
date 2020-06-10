@@ -1,39 +1,39 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo } from "react"
 
 const Parent = memo((props) => {
-  const [state, setState] = useState({ text: 'num: ' });
-  console.log('Parent');
-  console.log(props.children);
+  const [state, setState] = useState({ text: "num: " })
+  console.log("Parent")
+  console.log(props.children)
   useEffect(() => {
-    console.log('Parent useEffect');
-  });
-  return <div>{props.children}</div>;
-});
+    console.log("Parent useEffect")
+  })
+  return <div>{props.children}</div>
+})
 
 const Child = ({ num, text }) => {
-  console.log('Child');
+  console.log("Child")
   useEffect(() => {
-    console.log('Child useEffect');
-  });
+    console.log("Child useEffect")
+  })
   return (
     <div>
       {text}
       {num}
     </div>
-  );
-};
+  )
+}
 
 const Children = () => {
-  const [state, setState] = useState(0);
+  const [state, setState] = useState(0)
   useEffect(() => {
-    console.log('useEffect');
-  });
+    console.log("useEffect")
+  })
 
   return (
     <>
       <button
         onClick={() => {
-          setState((prev) => ++prev);
+          setState((prev) => ++prev)
         }}
       >
         Click me
@@ -42,7 +42,7 @@ const Children = () => {
         <Child num={state} />
       </Parent>
     </>
-  );
-};
+  )
+}
 
-export default Children;
+export default Children

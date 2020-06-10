@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "immer": "^6.0.9",
+    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -23,7 +24,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix src/**/*.jsx",
+    "prettier": "prettier ./src/* --write",
+    "test:all": "set CI=true && react-scripts test && npm run lint"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -39,5 +43,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-plugin-react": "^7.20.0",
+    "husky": "^4.2.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test:all"
+    }
   }
 }
