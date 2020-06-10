@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef } from "react"
 
 const Child = () => {
   console.log("Child")
-
+  console.log("For husky and lint-staged")
   return <div></div>
 }
 
