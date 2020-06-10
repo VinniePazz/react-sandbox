@@ -56,14 +56,9 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "*.{js,jsx}": [
-        "prettier --write",
-        "git add"
-      ]
-    },
-    "ignore": [
-      "**/api/*.api.ts"
+    "*.jsx": [
+      "nmp run lint",
+      "npm run prettier"
     ]
   }
 }
