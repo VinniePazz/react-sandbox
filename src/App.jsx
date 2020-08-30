@@ -11,7 +11,6 @@ export const TextContext = React.createContext()
 TextContext.displayName = "TEXT"
 
 function App() {
-  console.log(React.isValidElement(<Class />))
   return (
     <>
       {/* <Posts /> */}
