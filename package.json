@@ -52,12 +52,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run prettier"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*.jsx": [
-      "npm run prettier"
-    ]
+    "*.jsx": "prettier --write"
   }
 }
