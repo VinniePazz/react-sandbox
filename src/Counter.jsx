@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react"
-import { connect } from "react-redux"
-import { fake, increment, decrement } from "./actions/counter"
-import ChildCounter from "./ChildCounter"
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fake, increment, decrement } from './actions/counter';
+import ChildCounter from './ChildCounter';
 
 const Counter = ({ counter, fake, increment, decrement }) => {
-  console.log("COUNTER")
-  const [show, setShow] = useState(false)
+  console.log('for lint-staged');
+  const [show, setShow] = useState(false);
   return (
     <div>
       <p>{counter}</p>
@@ -14,21 +14,23 @@ const Counter = ({ counter, fake, increment, decrement }) => {
       <button onClick={fake}>FAKE</button>
       <button
         onClick={() => {
-          setShow(!show)
+          setShow(!show);
         }}
       >
         SHOW CHILD
       </button>
       {show && <ChildCounter />}
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => {
-  console.log("MSTP COUNTER")
+  console.log('MSTP COUNTER');
   return {
     counter: state.counter,
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, { fake, increment, decrement })(Counter)
+export default connect(mapStateToProps, { fake, increment, decrement })(
+  Counter
+);
