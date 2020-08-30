@@ -32,10 +32,10 @@ let Posts = ({ posts, fetchAllPosts, createPostAsync, setPostsFilter }) => {
   console.log('POSTS', posts);
   useEffect(() => {
     fetchAllPosts();
-  }, [fetchAllPosts]);
+  }, []);
   return (
     <div>
-      <button onClick={() => setPostsFilter('all')}>ALL</button>
+      <button onlick={() => setPostsFilter('all')}>ALL</button>
       <button onClick={() => setPostsFilter('cook')}>COOK</button>
       <button onClick={() => setPostsFilter('book')}>BOOK</button>
       <button onClick={() => createPostAsync({ title: 'hello' })}>
