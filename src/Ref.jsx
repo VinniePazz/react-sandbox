@@ -1,24 +1,23 @@
-import React, { useLayoutEffect, useRef } from "react"
+import React, { useLayoutEffect, useRef } from 'react';
 
 const Child = () => {
-  console.log("Child")
-  console.log("For husky and lint-staged")
-  return <div></div>
-}
+  console.log('For husky and lint-staged');
+  return <div></div>;
+};
 
 const Ref = () => {
-  const element = useRef(null)
+  const element = useRef(null);
   useLayoutEffect(() => {
-    console.log(element.current.clientHeight)
-    element.current.style.height = "1000px"
-    console.log(element.current.clientHeight)
-  })
+    console.log(element.current.clientHeight);
+    element.current.style.height = '1000px';
+    console.log(element.current.clientHeight);
+  });
   return (
     <>
       <Child />
-      <div ref={element} style={{ height: "500px", background: "brown" }}></div>
+      <div ref={element} style={{ height: '500px', background: 'brown' }}></div>
     </>
-  )
-}
+  );
+};
 
-export default Ref
+export default Ref;
