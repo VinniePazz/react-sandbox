@@ -2,7 +2,7 @@ import React, { useState, useEffect, memo } from 'react';
 
 const CustomDiv = memo(
   (props) => {
-    console.log('CustomDiv');
+    console.log('test change quotes');
     useEffect(() => {
       console.log('CustomDiv useEffect');
     });
