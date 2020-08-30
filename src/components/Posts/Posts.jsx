@@ -32,7 +32,7 @@ let Posts = ({ posts, fetchAllPosts, createPostAsync, setPostsFilter }) => {
   console.log('POSTS', posts);
   useEffect(() => {
     fetchAllPosts();
-  }, []);
+  }, [fetchAllPosts]);
   return (
     <div>
       <button onlick={() => setPostsFilter('all')}>ALL</button>
