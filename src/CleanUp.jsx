@@ -1,7 +1,6 @@
 import React, { useState, useEffect, memo } from "react"
 
 const ChildOne = ({ content }) => {
-  console.log("ChildOne")
   useEffect(() => {
     console.log("ChildOne useEffect")
     return () => {
@@ -12,7 +11,6 @@ const ChildOne = ({ content }) => {
 }
 
 const ChildTwo = ({ content }) => {
-  console.log("ChildTwo")
   useEffect(() => {
     console.log("ChildTwo useEffect")
     return () => {
